@@ -1,3 +1,25 @@
+"""
+Views for managing publications, publication types, and keywords in the publications app.
+
+This module contains the views for:
+- Listing, creating, retrieving, updating, and deleting publications.
+- Listing, creating, retrieving, updating, and deleting publication types.
+- Listing, creating, retrieving, updating, and deleting keywords.
+
+Each view is implemented as an APIView from Django Rest Framework, allowing for the handling of HTTP requests.
+
+Publicacion Views:
+    - PublicacionList: List all publications or create a new one.
+    - PublicacionDetail: Retrieve, update, or delete a publication by its primary key (pk).
+
+TipoPublicacion Views:
+    - TipoPublicacionList: List all publication types or create a new one.
+    - TipoPublicacionDetail: Retrieve, update, or delete a publication type by its primary key (pk).
+
+PalabraClave Views:
+    - PalabraClaveList: List all keywords or create a new one.
+    - PalabraClaveDetail: Retrieve, update, or delete a keyword by its primary key (pk).
+"""
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -12,7 +34,7 @@ from misApps.publicaciones.serializers import (
 # Publicacion Views
 class PublicacionList(APIView):
     """
-    Lista todas las publicaciones o crea una nueva
+    List all publications or create a new one.
     """
     def get(self, request, format=None):
         publicaciones = Publicacion.objects.all()
@@ -28,7 +50,7 @@ class PublicacionList(APIView):
 
 class PublicacionDetail(APIView):
     """
-    Recupera, actualiza o elimina una publicación por su pk
+    Retrieve, update or delete a publication by its primary key (pk).
     """
     def get_object(self, pk):
         try:
@@ -56,6 +78,9 @@ class PublicacionDetail(APIView):
 
 # TipoPublicacion Views
 class TipoPublicacionList(APIView):
+    """
+    List all publication types or create a new one.
+    """
     def get(self, request, format=None):
         tipos = TipoPublicacion.objects.all()
         serializer = TipoPublicacionSerializer(tipos, many=True)
@@ -69,6 +94,9 @@ class TipoPublicacionList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class TipoPublicacionDetail(APIView):
+    """
+    Retrieve, update or delete a publication type by its primary key (pk).
+    """
     def get_object(self, pk):
         try:
             return TipoPublicacion.objects.get(pk=pk)
@@ -95,6 +123,9 @@ class TipoPublicacionDetail(APIView):
 
 # PalabraClave Views
 class PalabraClaveList(APIView):
+    """
+    List all keywords or create a new one.
+    """
     def get(self, request, format=None):
         palabras_clave = PalabraClave.objects.all()
         serializer = PalabraClaveSerializer(palabras_clave, many=True)
@@ -108,6 +139,9 @@ class PalabraClaveList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class PalabraClaveDetail(APIView):
+    """
+    Retrieve, update or delete a keyword by its primary key (pk).
+    """
     def get_object(self, pk):
         try:
             return PalabraClave.objects.get(pk=pk)

@@ -1,3 +1,18 @@
+"""
+Views for managing Facultad and Programa models via API requests.
+
+This module provides API views for listing, retrieving, creating, updating,
+and deleting instances of the Facultad and Programa models. These views use
+Django Rest Framework's APIView and support both full and partial updates
+as well as error handling for non-existent objects.
+
+Classes:
+    - FacultadList: Handles listing all Facultad instances or creating a new Facultad.
+    - FacultadDetail: Handles retrieving, updating, or deleting a specific Facultad.
+    - ProgramaList: Handles listing all Programa instances or creating a new Programa.
+    - ProgramaDetail: Handles retrieving, updating, or deleting a specific Programa.
+
+"""
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status

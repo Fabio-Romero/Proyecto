@@ -115,8 +115,8 @@ DATABASES = {
     'oracle': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': 'xe',  # o 'nombre_base_de_datos'
-        'USER': 'pandiu_oracle',
-        'PASSWORD': 'FRG062004',
+        'USER': 'almacendb_admin',
+        'PASSWORD': '12345678',
         'HOST': 'localhost',  # o la dirección IP de tu servidor Oracle
         'PORT': '1521',       # el puerto por defecto para Oracle
     }

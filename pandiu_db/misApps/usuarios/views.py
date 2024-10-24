@@ -1,3 +1,22 @@
+"""
+Views for the usuarios app.
+
+This module contains API views for managing users (Usuario), user types (TipoUsuario),
+and the many-to-many relationship between users and user types (UsuarioTipoUsuario).
+The views provide the following functionalities:
+
+- Usuario:
+    - List all users or create a new user.
+    - Retrieve, update, or delete a specific user.
+
+- TipoUsuario:
+    - List all user types or create a new user type.
+    - Retrieve, update, or delete a specific user type.
+
+- UsuarioTipoUsuario:
+    - List all user-type relationships or create a new relationship.
+    - Retrieve, update, or delete a specific user-type relationship.
+"""
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -5,10 +24,10 @@ from django.http import Http404
 from misApps.usuarios.models import Usuario, TipoUsuario, UsuarioTipoUsuario
 from misApps.usuarios.serializers import UsuarioSerializer, TipoUsuarioSerializer, UsuarioTipoUsuarioSerializer
 
-# Vistas para Usuario
+# UsuariosList´s view
 class UsuarioList(APIView):
     """
-    Lista todos los usuarios o crea uno nuevo.
+    List all users or create ones
     """
     def get(self, request, format=None):
         usuarios = Usuario.objects.all()
@@ -59,10 +78,10 @@ class UsuarioDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# Vistas para TipoUsuario
+# TipoUsuarioList´s view
 class TipoUsuarioList(APIView):
     """
-    Lista todos los tipos de usuario o crea uno nuevo.
+    List all user types or create ones
     """
     def get(self, request, format=None):
         tipos = TipoUsuario.objects.all()
@@ -105,10 +124,10 @@ class TipoUsuarioDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# Vistas para UsuarioTipoUsuario (relación Many-to-Many)
+#UsuarioTipoUsuarioList´s view (relation Many-to-Many)
 class UsuarioTipoUsuarioList(APIView):
     """
-    Lista todos los UsuarioTipoUsuario o crea uno nuevo.
+    List all userTipesUsers or create ones, is a mid relation 
     """
     def get(self, request, format=None):
         usuario_tipos = UsuarioTipoUsuario.objects.all()
