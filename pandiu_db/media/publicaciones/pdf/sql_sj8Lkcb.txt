@@ -1,0 +1,54 @@
+CREATE DATABASE mantenimiento_fabioRomero;
+
+USE mantenimiento_fabioRomero;
+
+CREATE TABLE equipos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    placa VARCHAR(50),
+    marca VARCHAR(50),
+    modelo VARCHAR(50),
+    descripcion TEXT
+);
+
+CREATE TABLE mantenimientos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fecha DATE,
+    valor DECIMAL(10, 2),
+    descripcion TEXT,
+    equipo_id INT,
+    FOREIGN KEY (equipo_id) REFERENCES equipos(id)
+);
+
+-- Insertar registros en equipos
+INSERT INTO equipos (placa, marca, modelo, descripcion) VALUES
+('ABC123', 'Toyota', 'Corolla', 'Sedán compacto'),
+('XYZ456', 'Honda', 'Civic', 'Sedán compacto'),
+('LMN789', 'Ford', 'Focus', 'Hatchback'),
+('OPQ012', 'Chevrolet', 'Cruze', 'Sedán compacto'),
+('RST345', 'Nissan', 'Altima', 'Sedán mediano');
+
+-- Insertar registros en mantenimientos
+INSERT INTO mantenimientos (fecha, valor, descripcion, equipo_id) VALUES
+('2024-01-15', 150.00, 'Cambio de aceite', 1),
+('2024-02-20', 200.00, 'Revisión de frenos', 1),
+('2024-03-10', 120.00, 'Cambio de filtro', 2),
+('2024-04-05', 250.00, 'Revisión general', 2),
+('2024-05-12', 180.00, 'Reemplazo de batería', 3),
+('2024-06-25', 170.00, 'Chequeo de suspensión', 3),
+('2024-07-14', 160.00, 'Cambio de aceite', 4),
+('2024-08-09', 220.00, 'Revisión de frenos', 4),
+('2024-09-01', 140.00, 'Cambio de filtro', 5),
+('2024-09-20', 200.00, 'Revisión general', 5);
+
+DELIMITER //
+
+CREATE PROCEDURE ObtenerMantenimientosPorEquipo(IN fecha_inicio DATE, IN fecha_fin DATE)
+BEGIN
+    SELECT e.id, e.placa, COUNT(m.id) AS cantidad_mantenimientos
+    FROM equipos e
+    LEFT JOIN mantenimientos m ON e.id = m.equipo_id
+    WHERE m.fecha BETWEEN fecha_inicio AND fecha_fin
+    GROUP BY e.id, e.placa;
+END //
+
+DELIMITER ;
