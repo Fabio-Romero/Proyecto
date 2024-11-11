@@ -87,10 +87,10 @@ WSGI_APPLICATION = 'pandiu_db.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pandiu_mysql',
+        'NAME': 'paidu',
         'USER': 'fabio',
         'PASSWORD': '12345678',
-        'HOST': 'localhost',
+        'HOST': '172.30.123.229',
         'PORT': '3306',
     },
     'postgres': {
@@ -115,8 +115,8 @@ DATABASES = {
     'oracle': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': 'xe',  # o 'nombre_base_de_datos'
-        'USER': 'almacendb_admin',
-        'PASSWORD': '12345678',
+        'USER': 'paidu',
+        'PASSWORD': '6640',
         'HOST': 'localhost',  # o la dirección IP de tu servidor Oracle
         'PORT': '1521',       # el puerto por defecto para Oracle
     }
